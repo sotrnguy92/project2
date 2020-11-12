@@ -1,0 +1,10 @@
+DROP DATABASE IF EXISTS todo_db;
+
+CREATE DATABASE todo_db;
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT NOT NULL,
+    username VARCHAR(20) NOT NULL UNIQUE,
+    password VARCHAR(200) NOT NULL,
+    PRIMARY KEY(id)
+);
