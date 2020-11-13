@@ -17,4 +17,17 @@ module.exports = {
         }
     },
 
+    signUpApi: async (req, res) => {
+        const {username, password} = req.body;
+        console.log(req.body);
+        try {
+            const user = await insertUserToDb(username, password);
+            res.json(user);
+        }catch (e) {
+            console.log(e);
+            res.status(400)
+                .json(e);
+        }
+    }
+
 };
