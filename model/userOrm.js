@@ -9,7 +9,7 @@ const connection = require('../config/connection');
 
 const fetchUsers = async () => {
     try {
-        const rows = await connection.query(findAllUsers);
+        const [rows] = await connection.query(findAllUsers);
         console.log(rows);
         return rows;
     }catch (e) {
@@ -38,6 +38,14 @@ const insertUserToDb = async (username, password) => {
     }
 }
 
-insertUserToDb ('jax', 'password');
+// insertUserToDb ('jax', 'password');
 
 // fetchUserById(1);
+
+fetchUsers();
+
+module.exports = {
+    fetchUsers,
+    fetchUserById,
+    insertUserToDb,
+}
