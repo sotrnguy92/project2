@@ -2,6 +2,7 @@ const {
     fetchUsers,
     fetchUserById,
     insertUserToDb,
+    deleteUserById,
 } = require('../model/userOrm');
 
 module.exports = {
@@ -18,9 +19,9 @@ module.exports = {
     },
 
     signUpApi: async (req, res) => {
-        const {username, password} = req.body;
-        console.log(req.body);
+        // console.log(req.body);
         try {
+            const {username, password} = req.body;
             const user = await insertUserToDb(username, password);
             res.json(user);
         }catch (e) {
@@ -28,6 +29,34 @@ module.exports = {
             res.status(400)
                 .json(e);
         }
-    }
+    },
+
+    getUserByIdApi: async (req, res) => {
+        // console.log(req.params.userid);
+        try{
+            const user = await fetchUserById(req.params.userid);
+            console.log('in the controller getuserapi', user);
+            res.json(user);
+        }catch (e) {
+            console.log(e);
+            res.status(400)
+                .json(e);
+        }
+    },
+
+    deleteUserByIdApi: async (req, res) => {
+        try {
+            const deletedUser = await deleteUserById(req.params.userid);
+            console.log(deletedUser)
+            res.json(deletedUser);
+        }catch (e) {
+            console.log(e);
+            res.status(400)
+                .json(e);
+        }
+    },
+
+
+
 
 };

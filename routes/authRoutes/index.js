@@ -3,7 +3,7 @@ const router = require('express')
 
 const {
     signUpApi,
-} = require('../../../controllers/userController')
+} = require('../../controllers/userController')
 
 
 router.post('/signup', signUpApi);
