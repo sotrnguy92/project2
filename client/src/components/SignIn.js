@@ -1,10 +1,12 @@
 import React from 'react';
+import { reduxForm, Field } from 'redux-form';
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -18,14 +20,16 @@ function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
-                Your Website
+            <Link color="inherit" href="#">
+                Son Nguyen
             </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
         </Typography>
     );
 }
+
+
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -48,7 +52,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn() {
+    const history = useHistory();
+
     const classes = useStyles();
+
+
+    const handleSignIn = () => {
+        try{
+            history.push('/todo');
+            console.log('this worked!')
+        }catch (e) {
+            throw new Error(e);
+        }
+    }
 
     return (
         <Container component="main" maxWidth="xs">
@@ -83,11 +99,11 @@ export default function SignIn() {
                         autoComplete="current-password"
                     />
                     <Button
-                        type="submit"
                         fullWidth
                         variant="contained"
                         color="primary"
                         className={classes.submit}
+                        onClick={handleSignIn}
                     >
                         Sign In
                     </Button>
