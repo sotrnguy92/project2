@@ -1,7 +1,6 @@
 const {
     fetchUsers,
     fetchUserById,
-    insertUserToDb,
     deleteUserById,
 } = require('../model/userOrm');
 
@@ -18,18 +17,6 @@ module.exports = {
         }
     },
 
-    signUpApi: async (req, res) => {
-        // console.log(req.body);
-        try {
-            const {username, password} = req.body;
-            const user = await insertUserToDb(username, password);
-            res.json(user);
-        }catch (e) {
-            console.log(e);
-            res.status(400)
-                .json(e);
-        }
-    },
 
     getUserByIdApi: async (req, res) => {
         // console.log(req.params.userid);
