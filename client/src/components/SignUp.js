@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState} from 'react';
+import axios from 'axios';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -49,8 +50,28 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
     const classes = useStyles();
+    const history = useHistory();
 
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+          await axios.post('/auth/signup', {username, password})
+              .then(res => {
+                  const {username, id} = res.data
+                  console.log("I am res.data", res.data);
+                  console.log('I am username from res data', username);
+                  console.log('I am userId from res data', id);
+                  localStorage.setItem('username', username);
+                  localStorage.setItem('userId', id);
+              })
+          history.push('/todo');
+        }catch (e) {
+            throw new Error(e);
+        };
+    }
 
     return (
         <Container component="main" maxWidth="xs">
@@ -62,14 +83,18 @@ export default function SignUp() {
                 <Typography component="h1" variant="h5">
                     Sign up
                 </Typography>
-                <form className={classes.form} noValidate>
+                <form onSubmit={handleSubmit}
+                    className={classes.form} noValidate>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <TextField
                                 variant="outlined"
                                 required
                                 fullWidth
-                                id="email"
+                                onChange={async (event) => {
+                                    await setUsername(event.target.value)
+                                    console.log(username);
+                                }}
                                 label="Username"
                                 name="username"
                             />
@@ -79,6 +104,10 @@ export default function SignUp() {
                                 variant="outlined"
                                 required
                                 fullWidth
+                                onChange={async (event) => {
+                                    await setPassword(event.target.value)
+                                    console.log(password);
+                                }}
                                 name="password"
                                 label="Password"
                                 type="password"
