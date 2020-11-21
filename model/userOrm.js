@@ -9,6 +9,10 @@ const {
 
 const connection = require('../config/connection');
 
+const matchedPassword = async (inputPassword, savedPassword) => {
+    return await bcrypt.compare(inputPassword, savedPassword);
+}
+
 const fetchUsers = async () => {
     try {
         const [rows] = await connection.query(findAllUsers);
@@ -82,4 +86,5 @@ module.exports = {
     insertUserToDb,
     deleteUserById,
     findUserByUsername,
+    matchedPassword,
 }

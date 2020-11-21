@@ -3,9 +3,10 @@ const {
     insertUserToDb,
 } = require('../model/userOrm')
 
-const userToken = (id) => {
+const userToken = (id, username) => {
     return jwt.sign({
         sub: id,
+        username: username,
         iat: new Date().getTime()
     }, process.env.JWT_SECRET);
 };
@@ -17,7 +18,7 @@ module.exports = {
         const {username, password} = req.body;
         try {
             const user = await insertUserToDb(username, password);
-            res.json(userToken(user.id));
+            res.json(userToken(user.id, user.username));
         }catch (e) {
             console.log(e);
             res.status(400)
@@ -25,8 +26,8 @@ module.exports = {
         }
     },
 
-    singInApi: (req, res) => {
+    signInApi: (req, res) => {
         console.log('Bruh we logged in as:', req.user);
-        res.json(userToken(req.user.id));
+        res.json(userToken(req.user.id, req.user.username));
     }
 }

@@ -3,6 +3,8 @@ require('dotenv')
 const express = require('express');
 const routes = require('./routes');
 
+require('./services/passport');
+
 const app = express();
 
 app.use(express.urlencoded({extended: true}));
