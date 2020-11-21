@@ -81,7 +81,7 @@ export default function HeadBar() {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-    const username = localStorage.getItem('username');
+    const token = localStorage.getItem('token');
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -123,7 +123,7 @@ export default function HeadBar() {
             <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
             <MenuItem onClick={handleMenuClose}>My account</MenuItem>
             {
-                username ?
+                token ?
                     <MenuItem
                         onClick={handleSignOut}
                         to='/'

@@ -60,12 +60,9 @@ export default function SignUp() {
         try {
           await axios.post('/auth/signup', {username, password})
               .then(res => {
-                  const {username, id} = res.data
+                  const token = res.data
                   console.log("I am res.data", res.data);
-                  console.log('I am username from res data', username);
-                  console.log('I am userId from res data', id);
-                  localStorage.setItem('username', username);
-                  localStorage.setItem('userId', id);
+                  localStorage.setItem('token', token);
               })
           history.push('/todo');
         }catch (e) {

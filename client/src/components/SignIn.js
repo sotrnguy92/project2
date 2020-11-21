@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState}from 'react';
 import { reduxForm, Field } from 'redux-form';
+import axios from 'axios';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -53,14 +54,24 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
     const history = useHistory();
-
     const classes = useStyles();
 
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
-    const handleSignIn = () => {
+    const handleSignIn = async (event) => {
+        event.preventDefault();
         try{
-            history.push('/todo');
-            console.log('this worked!')
+            await axios.post('/auth/signin', {username, password})
+                .then(res => {
+                    const token = res.data;
+                    console.log("I am res.data!!!", res.data);
+                    console.log("I am the token!!", token)
+                    console.log("I am username!!!!", username);
+                    localStorage.setItem('token', token);
+                    history.push('/todo');
+                    console.log('this worked!')
+                })
         }catch (e) {
             throw new Error(e);
         }
@@ -82,6 +93,10 @@ export default function SignIn() {
                         margin="normal"
                         required
                         fullWidth
+                        onChange={async (event) => {
+                            await setUsername(event.target.value)
+                            console.log(username);
+                        }}
                         id="username"
                         label="Username"
                         name="username"
@@ -92,6 +107,10 @@ export default function SignIn() {
                         margin="normal"
                         required
                         fullWidth
+                        onChange={async (event) => {
+                            await setPassword(event.target.value)
+                            console.log(password);
+                        }}
                         name="password"
                         label="Password"
                         type="password"
