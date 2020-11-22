@@ -21,8 +21,14 @@ module.exports = {
     getTodosByUserApi: async (req, res) => {
         try {
             console.log(req.params)
-            const userTodos = await fetchTodosByUser(req.params.userId);
-            res.json(userTodos)
+            if(req.user.id) {
+                const userTodos = await fetchTodosByUser(req.user.id);
+                res.json(userTodos)
+            } else if (req.params.userId) {
+                const userTodos = await fetchTodosByUser(req.params.userId);
+                res.json(userTodos)
+            }
+
         }catch (e) {
             console.log(e);
             res.status(400)
@@ -44,9 +50,12 @@ module.exports = {
 
     insertTodoToDbApi: async (req, res) => {
         try{
-            console.log(req.body)
-            const { todo, userId} = req.body;
-            const insertedTodo = await insertTodoDb(todo, userId);
+            const { todo} = req.body;
+            const {id} = req.user;
+            console.log("I am req.body from insertToDbApi !!!",req.body)
+            console.log("I am req from insertToDbApi !!!", id);
+
+            const insertedTodo = await insertTodoDb(todo, id);
             res.json(insertedTodo);
         }catch (e) {
             console.log(e);

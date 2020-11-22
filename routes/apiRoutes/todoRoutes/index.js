@@ -9,6 +9,9 @@ const {
 
 } = require('../../../controllers/todoController');
 
+const authMiddleware = require('../../../middlewares/authMiddleware')
+
+router.use(authMiddleware)
 
 router.route('/')
     .get(getAllTodosApi)
@@ -19,7 +22,7 @@ router.route('/todo/:todoId')
     .get(getTodoByTodoIdApi)
     .delete(deleteTodoApi)
 
-router.route('/:userId')
+router.route('/user/:userId')
     .get(getTodosByUserApi)
 
 

@@ -1,4 +1,5 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
+import axios from 'axios';
 import { reduxForm, Field } from 'redux-form';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -34,11 +35,18 @@ export default function TodoView() {
     const [todoList, setTodoList] = useState([]);
     const [ todo, setTodo] = useState('');
 
+    useEffect(async () => {
+        const dbTodos = await axios.get(`/api/todos/user/3`, { headers: { authorization: localStorage.getItem('token') }})
+        console.log("I am in useEffect", dbTodos.data)
+        setTodoList([...dbTodos.data]);
+    },[]);
+
     const handleAddTodo = (event) => {
         count = count + 1;
         event.preventDefault();
 
         if (todo){
+            axios.post('api/todos/', {todo}, { headers: { authorization: localStorage.getItem('token') }})
             setTodoList([...todoList, {todo: todo, id: count}]);
             setTodo('');
         }
@@ -47,7 +55,6 @@ export default function TodoView() {
 
 
 
-    console.log(todoList);
 
     return (
         <Container component="main" maxWidth="xs">
@@ -69,8 +76,7 @@ export default function TodoView() {
                                label="Todo"
                                variant="outlined"
                                onChange={async (event) => {
-                                   await setTodo(event.target.value)
-                                   console.log(todo);
+                                   await setTodo(event.target.value);
                                }}
                     />
                     <Button

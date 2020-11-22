@@ -8,10 +8,10 @@ const {
 
 const authMiddleware = require('../../../middlewares/authMiddleware')
 
-router.get('/', authMiddleware, getAllUsersApi)
-//
-// router.route('/')
-//     .get(getAllUsersApi);
+router.use(authMiddleware)
+
+router.route('/')
+    .get(getAllUsersApi);
 
 router.route('/:userid')
     .get(getUserByIdApi)
