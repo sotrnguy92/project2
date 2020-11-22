@@ -64,7 +64,7 @@ export default function SignUp() {
                   console.log("I am res.data", res.data);
                   localStorage.setItem('token', token);
               })
-          history.push('/todo');
+          history.push('/todos');
         }catch (e) {
             throw new Error(e);
         };

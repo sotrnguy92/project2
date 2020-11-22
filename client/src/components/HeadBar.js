@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link as reactLink, Link} from 'react-router-dom';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -10,6 +10,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import {Button} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     grow: {
@@ -81,7 +82,11 @@ export default function HeadBar() {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-    const token = localStorage.getItem('token');
+    const [token, setToken] = React.useState(localStorage.getItem('token'))
+
+    React.useEffect(() => {
+        setToken(localStorage.getItem('token'));
+    })
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -107,6 +112,7 @@ export default function HeadBar() {
         localStorage.removeItem('username');
         localStorage.removeItem('userId');
         localStorage.removeItem('token');
+        handleMenuClose();
     }
 
     const menuId = 'primary-search-account-menu';
@@ -146,18 +152,33 @@ export default function HeadBar() {
             open={isMobileMenuOpen}
             onClose={handleMobileMenuClose}
         >
-
-            <MenuItem onClick={handleProfileMenuOpen}>
-                <IconButton
-                    aria-label="account of current user"
-                    aria-controls="primary-search-account-menu"
-                    aria-haspopup="true"
-                    color="inherit"
-                >
-                    <AccountCircle />
-                </IconButton>
-                <p>Profile</p>
-            </MenuItem>
+            {token ? <MenuItem
+                variant="h5"
+                color={"inherit"}
+                component={reactLink}
+                to = '/todos'
+                variant="body2">
+                My Todos
+            </MenuItem> :
+                <div>
+                    <MenuItem
+                        variant="h5"
+                        color={"inherit"}
+                        component={reactLink}
+                        to = '/'
+                        variant="body2">
+                        Sign In
+                    </MenuItem>
+                    <MenuItem
+                        variant="h5"
+                        color={"inherit"}
+                        component={reactLink}
+                        to = '/signup'
+                        variant="body2">
+                        Sign Up
+                    </MenuItem>
+                </div>
+            }
         </Menu>
     );
 
@@ -171,10 +192,11 @@ export default function HeadBar() {
                         className={classes.menuButton}
                         color="inherit"
                         aria-label="open drawer"
+                        onClick={handleMobileMenuOpen}
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography align="center" className={classes.title} variant="h4" noWrap>
+                    <Typography align="center" className={classes.title} variant="h3" noWrap>
                         Todo App
                     </Typography>
                     <div className={classes.grow} />

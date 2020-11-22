@@ -16,7 +16,7 @@ function App() {
         <HeadBar/>
       <Route exact path ='/' component={SignIn}/>
       <Route exact path ='/signup' component={SignUp}/>
-      <Route exact path ='/todo' component={TodoView}/>
+      <Route exact path ='/todos' component={TodoView}/>
       <Route exact path = '/users' component={UserListView}/>
     </Router>
   );

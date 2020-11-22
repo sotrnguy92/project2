@@ -69,7 +69,7 @@ export default function SignIn() {
                     console.log("I am the token!!", token)
                     console.log("I am username!!!!", username);
                     localStorage.setItem('token', token);
-                    history.push('/todo');
+                    history.push('/todos');
                     console.log('this worked!')
                 })
         }catch (e) {
