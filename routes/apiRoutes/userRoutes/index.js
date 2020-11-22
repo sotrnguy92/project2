@@ -6,9 +6,12 @@ const {
     deleteUserByIdApi
 } = require('../../../controllers/userController');
 
+const authMiddleware = require('../../../middlewares/authMiddleware')
 
-router.route('/')
-    .get(getAllUsersApi);
+router.get('/', authMiddleware, getAllUsersApi)
+//
+// router.route('/')
+//     .get(getAllUsersApi);
 
 router.route('/:userid')
     .get(getUserByIdApi)

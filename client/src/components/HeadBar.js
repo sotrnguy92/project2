@@ -152,14 +152,25 @@ export default function HeadBar() {
             open={isMobileMenuOpen}
             onClose={handleMobileMenuClose}
         >
-            {token ? <MenuItem
-                variant="h5"
-                color={"inherit"}
-                component={reactLink}
-                to = '/todos'
-                variant="body2">
-                My Todos
-            </MenuItem> :
+            {token ?
+                <div>
+                    <MenuItem
+                        variant="h5"
+                        color={"inherit"}
+                        component={reactLink}
+                        to = '/todos'
+                        variant="body2">
+                        My Todos
+                    </MenuItem>
+                    <MenuItem
+                        variant="h5"
+                        color={"inherit"}
+                        component={reactLink}
+                        to = '/users'
+                        variant="body2">
+                        All Users
+                    </MenuItem>
+                </div> :
                 <div>
                     <MenuItem
                         variant="h5"
