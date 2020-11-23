@@ -41,18 +41,31 @@ export default function TodoView() {
         setTodoList([...dbTodos.data]);
     },[]);
 
-    const handleAddTodo = (event) => {
+    const handleAddTodo = async (event) => {
         count = count + 1;
         event.preventDefault();
 
-        if (todo){
-            axios.post('api/todos/', {todo}, { headers: { authorization: localStorage.getItem('token') }})
-            setTodoList([...todoList, {todo: todo, id: count}]);
+        if (todo) {
+            const addedTodo = await axios.post('api/todos/', {todo}, {headers: {authorization: localStorage.getItem('token')}})
+            console.log('I am the added Todo from the front end!!!',addedTodo.data);
+            const todoId = addedTodo.data.id;
+            setTodoList([...todoList, {todo: todo, id: todoId}]);
             setTodo('');
         }
-
     }
 
+    const handleDelete = (event) => {
+        console.log(event.target.innerText);
+        const allTodos = todoList
+        allTodos.forEach((item) => {
+            if (event.target.innerText === item.todo) {
+                axios.delete(`api/todos/todo/${item.id}`,{headers: {authorization: localStorage.getItem('token')}})
+                setTodoList(allTodos.filter((value, index, allTodos) =>{
+                    return value !== item;
+                }))
+            }
+        })
+    };
 
 
 
@@ -89,8 +102,12 @@ export default function TodoView() {
                 <List className={classes.root} component="nav" aria-label="secondary mailbox folders">
                     {todoList.map(item => {
                         return(
-                            <ListItem key={item.id} button>
-                                <ListItemText  primary={item.todo}/>
+                            <ListItem
+                                key={item.id}
+                                data-index={item.id}
+                                onClick={handleDelete}
+                                button>
+                                <ListItemText id={item.id} primary={item.todo}/>
                             </ListItem>
                         )
                     })}

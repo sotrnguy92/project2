@@ -56,6 +56,7 @@ module.exports = {
             console.log("I am req from insertToDbApi !!!", id);
 
             const insertedTodo = await insertTodoDb(todo, id);
+            console.log('I am inserted Todo from insert todo db api!!',insertedTodo)
             res.json(insertedTodo);
         }catch (e) {
             console.log(e);

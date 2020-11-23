@@ -158,6 +158,7 @@ export default function HeadBar() {
                         variant="h5"
                         color={"inherit"}
                         component={reactLink}
+                        onClick={handleMobileMenuClose}
                         to = '/todos'
                         variant="body2">
                         My Todos
@@ -166,6 +167,7 @@ export default function HeadBar() {
                         variant="h5"
                         color={"inherit"}
                         component={reactLink}
+                        onClick={handleMobileMenuClose}
                         to = '/users'
                         variant="body2">
                         All Users

@@ -11,8 +11,8 @@ const connection = require('../config/connection');
 const fetchTodoById = async (todoId) => {
     try {
         const [todo] = await connection.query(findTodoByIdQuery, todoId);
-        console.log('I am in fetch Todo by ID ',todo);
-        return todo
+        console.log('I am in fetch Todo by ID ',todo[0]);
+        return todo[0]
     }catch (e) {
         throw new Error(e)
     }
