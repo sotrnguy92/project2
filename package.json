@@ -10,7 +10,7 @@
     "client": "cd client && npm run start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "install": "cd client && npm install",
-    "build": "cd client && run npm build",
+    "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
   },
   "keywords": [],
