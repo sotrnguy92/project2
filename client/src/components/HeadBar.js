@@ -78,7 +78,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function HeadBar() {
-    console.log("I have renderd in HeadBar!!");
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);

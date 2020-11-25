@@ -59,7 +59,6 @@ export default function SignUp() {
           await axios.post('/auth/signup', {username, password})
               .then(res => {
                   const token = res.data
-                  console.log("I am res.data", res.data);
                   localStorage.setItem('token', token);
               })
           history.push('/todos');
@@ -88,7 +87,6 @@ export default function SignUp() {
                                 fullWidth
                                 onChange={async (event) => {
                                     await setUsername(event.target.value)
-                                    console.log(username);
                                 }}
                                 label="Username"
                                 name="username"
@@ -101,7 +99,6 @@ export default function SignUp() {
                                 fullWidth
                                 onChange={async (event) => {
                                     await setPassword(event.target.value)
-                                    console.log(password);
                                 }}
                                 name="password"
                                 label="Password"

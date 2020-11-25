@@ -28,7 +28,6 @@ let count = 2;
 
 export default function TodoView(props) {
     const classes = useStyles();
-    console.log("I have rendered!!!")
 
 
     const [todoList, setTodoList] = useState([]);
@@ -36,8 +35,6 @@ export default function TodoView(props) {
 
     useEffect(async () => {
         const dbTodos = await axios.get(`/api/todos/user/${null}`, { headers: { authorization: localStorage.getItem('token') }})
-        console.log("I am in useEffect", dbTodos.data)
-        console.log('I am in useEffect as well!!', props);
         setTodoList([...dbTodos.data]);
     },[]);
 
@@ -47,7 +44,6 @@ export default function TodoView(props) {
 
         if (todo) {
             const addedTodo = await axios.post('api/todos/', {todo}, {headers: {authorization: localStorage.getItem('token')}})
-            console.log('I am the added Todo from the front end!!!',addedTodo.data);
             const todoId = addedTodo.data.id;
             setTodoList([...todoList, {todo: todo, id: todoId}]);
             setTodo('');
@@ -55,7 +51,6 @@ export default function TodoView(props) {
     }
 
     const handleDelete = (event) => {
-        console.log(event.target.innerText);
         const allTodos = todoList
         allTodos.forEach((item) => {
             if (event.target.innerText === item.todo) {
@@ -104,7 +99,6 @@ export default function TodoView(props) {
                         return(
                             <ListItem
                                 key={item.id}
-                                data-index={item.id}
                                 onClick={handleDelete}
                                 button>
                                 <ListItemText id={item.id} primary={item.todo}/>

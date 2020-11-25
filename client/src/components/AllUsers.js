@@ -33,7 +33,6 @@ export const UserListView = () => {
     },[])
 
 
-    console.log("I am the users array!!!!", allUsers);
 
     return (
         <Container component="main" maxWidth="xs">

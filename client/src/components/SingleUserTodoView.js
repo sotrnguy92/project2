@@ -26,7 +26,6 @@ let count = 2;
 
 export default function SingleUserView(props) {
     const classes = useStyles();
-    console.log("I have rendered!!!")
 
 
     const [todoList, setTodoList] = useState([]);

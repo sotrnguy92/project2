@@ -16,14 +16,11 @@ const localStrategy = new LocalStrategy(async (username, password, done)=> {
     if (user) {
         const passwordsMatch = await matchedPassword(password, user.password);
         if (passwordsMatch) {
-            console.log("i am in passport!!!", user);
-            console.log(passwordsMatch);
+
             return done(null, user);
         }
-        console.log('found user but passwords dont match');
         return done(null, false);
     } else {
-        console.log('did not find user');
         return done(null, false);
     }
 });
@@ -33,7 +30,6 @@ const jwtOptions = {
 };
 
 const jwtStrategy = new JwtStrategy(jwtOptions, async (jwtToken, done) =>{
-    console.log(jwtToken);
 
     let user;
 

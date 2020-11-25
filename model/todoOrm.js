@@ -43,7 +43,6 @@ const fetchTodosByUser = async (userId) => {
 const fetchAllTodos = async () => {
     try{
         const [result] = await connection.query(findAllTodosQuery);
-        // console.log(result);
         return result;
     }catch (e) {
         throw new Error(e);
@@ -53,7 +52,6 @@ const fetchAllTodos = async () => {
 const deleteTodoFromDb = async (todoId) => {
     try{
         const deletedTodo = fetchTodoById(todoId);
-        console.log('im in the delete todo from db', deletedTodo);
         await connection.query(deleteTodoByIdQuery, todoId);
         return deletedTodo;
     }catch (e) {
@@ -61,15 +59,8 @@ const deleteTodoFromDb = async (todoId) => {
     }
 }
 
-// let test = insertTodoDb('testing another user 1', 3);
 
-// fetchTodosByUser(2);
 
-fetchAllTodos();
-
-// fetchTodoById(1);
-
-// console.log('I am the test', test);
 
 module.exports = {
     fetchTodoById,

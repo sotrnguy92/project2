@@ -12,8 +12,6 @@ const userToken = (id) => {
 
 module.exports = {
     signUpApi: async (req, res) => {
-        console.log('this is the secret', process.env.JWT_SECRET)
-        // console.log(req.body);
         const {username, password} = req.body;
         try {
             const user = await insertUserToDb(username, password);
@@ -26,7 +24,6 @@ module.exports = {
     },
 
     signInApi: (req, res) => {
-        console.log('Bruh we logged in as:', req.user);
         res.json(userToken(req.user.id));
     }
 }

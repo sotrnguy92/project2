@@ -38,7 +38,6 @@ module.exports = {
 
     getTodoByTodoIdApi: async (req, res) => {
         try{
-            console.log(req.params);
             const todo = await fetchTodoById(req.params.todoId)
             res.json(todo);
         }catch(e) {
@@ -52,11 +51,9 @@ module.exports = {
         try{
             const { todo} = req.body;
             const {id} = req.user;
-            console.log("I am req.body from insertToDbApi !!!",req.body)
-            console.log("I am req from insertToDbApi !!!", id);
+
 
             const insertedTodo = await insertTodoDb(todo, id);
-            console.log('I am inserted Todo from insert todo db api!!',insertedTodo)
             res.json(insertedTodo);
         }catch (e) {
             console.log(e);
@@ -67,9 +64,7 @@ module.exports = {
 
     deleteTodoApi: async (req, res) => {
         try {
-            console.log(req.params);
             const deletedTodo = await deleteTodoFromDb(req.params.todoId);
-            console.log("im in the delete todo API ", deletedTodo);
             res.json(deletedTodo);
         }catch (e) {
             console.log(e);

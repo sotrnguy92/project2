@@ -63,12 +63,9 @@ export default function SignIn() {
             await axios.post('/auth/signin', {username, password})
                 .then(res => {
                     const token = res.data;
-                    console.log("I am res.data!!!", res.data);
-                    console.log("I am the token!!", token)
-                    console.log("I am username!!!!", username);
+
                     localStorage.setItem('token', token);
                     history.push('/todos');
-                    console.log('this worked!')
                 })
         }catch (e) {
             throw new Error(e);
@@ -93,7 +90,6 @@ export default function SignIn() {
                         fullWidth
                         onChange={async (event) => {
                             await setUsername(event.target.value)
-                            console.log(username);
                         }}
                         id="username"
                         label="Username"
@@ -107,7 +103,6 @@ export default function SignIn() {
                         fullWidth
                         onChange={async (event) => {
                             await setPassword(event.target.value)
-                            console.log(password);
                         }}
                         name="password"
                         label="Password"
