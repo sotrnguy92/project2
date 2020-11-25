@@ -24,13 +24,13 @@ export const UserListView = () => {
     const classes = useStyles();
     const [ allUsers, setAllUsers] = useState([]);
 
-    useEffect(() => {
-        axios.get('/api/users', { headers: { authorization: localStorage.getItem('token') }})
+    useEffect(async () => {
+        await axios.get('/api/users', { headers: { authorization: localStorage.getItem('token') }})
             .then(res => {
                 const users = res.data;
                 setAllUsers([...allUsers].concat(users));
             });
-    },[])
+    },[]);
 
 
 

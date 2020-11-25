@@ -39,7 +39,6 @@ export default function TodoView(props) {
     },[]);
 
     const handleAddTodo = async (event) => {
-        count = count + 1;
         event.preventDefault();
 
         if (todo) {
@@ -62,6 +61,9 @@ export default function TodoView(props) {
         })
     };
 
+    const displayTodos = () => {
+
+        }
 
 
     return (
@@ -83,8 +85,8 @@ export default function TodoView(props) {
                                name = "todo"
                                label="Todo"
                                variant="outlined"
-                               onChange={async (event) => {
-                                   await setTodo(event.target.value);
+                               onChange={ (event) => {
+                                    setTodo(event.target.value);
                                }}
                     />
                     <Button
@@ -96,7 +98,8 @@ export default function TodoView(props) {
                 </form>
                 <List className={classes.root} component="nav" aria-label="secondary mailbox folders">
                     {todoList.map(item => {
-                        return(
+                        console.log(todoList)
+                        return (
                             <ListItem
                                 key={item.id}
                                 onClick={handleDelete}
