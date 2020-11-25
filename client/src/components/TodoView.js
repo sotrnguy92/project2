@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios';
-import { reduxForm, Field } from 'redux-form';
 
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
