@@ -21,11 +21,11 @@ module.exports = {
     getTodosByUserApi: async (req, res) => {
         try {
             console.log(req.params)
-            if(req.user.id) {
-                const userTodos = await fetchTodosByUser(req.user.id);
-                res.json(userTodos)
-            } else if (req.params.userId) {
+            if (req.params.userId !== 'null') {
                 const userTodos = await fetchTodosByUser(req.params.userId);
+                res.json(userTodos)
+            } else if(req.user.id) {
+                const userTodos = await fetchTodosByUser(req.user.id);
                 res.json(userTodos)
             }
 

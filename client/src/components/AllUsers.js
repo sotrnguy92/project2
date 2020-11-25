@@ -29,9 +29,7 @@ export const UserListView = () => {
     useEffect(() => {
         axios.get('/api/users', { headers: { authorization: localStorage.getItem('token') }})
             .then(res => {
-                console.log(res.data);
                 const users = res.data;
-                console.log("I AM USERS IN AXIOS!!", users);
                 setAllUsers([...allUsers].concat(users));
             });
     },[])

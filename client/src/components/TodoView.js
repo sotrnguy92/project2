@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
 let count = 2;
 
-export default function TodoView() {
+export default function TodoView(props) {
     const classes = useStyles();
     console.log("I have rendered!!!")
 
@@ -36,8 +36,9 @@ export default function TodoView() {
     const [ todo, setTodo] = useState('');
 
     useEffect(async () => {
-        const dbTodos = await axios.get(`/api/todos/user/3`, { headers: { authorization: localStorage.getItem('token') }})
+        const dbTodos = await axios.get(`/api/todos/user/${null}`, { headers: { authorization: localStorage.getItem('token') }})
         console.log("I am in useEffect", dbTodos.data)
+        console.log('I am in useEffect as well!!', props);
         setTodoList([...dbTodos.data]);
     },[]);
 

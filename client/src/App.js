@@ -9,6 +9,7 @@ import TodoView from "./components/TodoView";
 // import {WrappedTodoView} from './components/TodoView'
 // import {WrappedSignIn} from './components/testSignIn'
 import {UserListView} from "./components/AllUsers"
+import SingleUserTodoView from "./components/SingleUserTodoView";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route exact path ='/signup' component={SignUp}/>
       <Route exact path ='/todos' component={TodoView}/>
       <Route exact path = '/users' component={UserListView}/>
+      <Route exact path = '/users/user/:userId' component={SingleUserTodoView}/>
     </Router>
   );
 }
