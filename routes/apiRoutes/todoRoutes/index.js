@@ -25,7 +25,7 @@ router.route('/todo/:todoId')
 
 
 
-router.route('/user/:userId')
+router.route('/user/')
     .get(getTodosByUserApi);
 
 router.route('/user')
