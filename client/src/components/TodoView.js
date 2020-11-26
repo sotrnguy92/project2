@@ -32,17 +32,21 @@ export default function TodoView(props) {
     const [todoList, setTodoList] = useState([]);
     const [ todo, setTodo] = useState('');
 
-    useEffect(async () => {
-        const dbTodos = await axios.get(`/api/todos/user`, { headers: { authorization: localStorage.getItem('token') }})
-        console.log(dbTodos);
-        setTodoList([...dbTodos.data]);
+    useEffect(( ) => {
+        // IIFE Immediately Invoked Function
+        (async () => {
+            const dbTodos = await axios.get(`/api/todos/user`, { headers: { authorization: localStorage.getItem('token') }})
+            console.log(dbTodos);
+            setTodoList([...dbTodos.data]);
+        })()
+
     },[]);
 
     const handleAddTodo = async (event) => {
         event.preventDefault();
 
         if (todo) {
-            const addedTodo = await axios.post('api/todos/', {todo}, {headers: {authorization: localStorage.getItem('token')}})
+            const addedTodo = await axios.post('/api/todos/', {todo}, {headers: {authorization: localStorage.getItem('token')}})
             const todoId = addedTodo.data.id;
             setTodoList([...todoList, {todo: todo, id: todoId}]);
             setTodo('');
