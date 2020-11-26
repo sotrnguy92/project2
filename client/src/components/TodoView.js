@@ -41,7 +41,7 @@ export default function TodoView(props) {
             const dbTodos = await axios.get(`/api/todos/user`, { headers: { authorization: localStorage.getItem('token') }})
             console.log(dbTodos);
             setTodoList([...dbTodos.data]);
-        })()
+        })();
 
     },[]);
 
@@ -105,7 +105,6 @@ export default function TodoView(props) {
                 </form>
                 <List className={classes.root} component="nav" aria-label="secondary mailbox folders">
                     {todoList.map(item => {
-                        console.log(todoList)
                         return (
                             <ListItem
                                 key={item.id}
