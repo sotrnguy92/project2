@@ -22,7 +22,10 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         alignItems: 'center',
     },
-}));
+}),{
+    index: 1
+});
+
 
 
 export default function TodoView(props) {
